@@ -1,0 +1,1 @@
+3.  Keep Doc Switcher's ordering in sync with Tab bar.

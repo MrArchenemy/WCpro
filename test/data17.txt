@@ -1,0 +1,1 @@
+1.  Fix macro playing back crash issue on new added "find previous" and "find next" buttons.
