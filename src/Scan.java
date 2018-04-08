@@ -15,22 +15,30 @@ public class Scan {
 	}
 	public static Map<String, Integer> scan(String path)throws IOException
 	{
-		//¶ÁÈ¡ÎÄµµ²¢½«ËùÓĞµ¥´Ê·ÅÈëlist²¢Í³¼Æ
+		//è¯»å–æ–‡æ¡£å¹¶å°†æ‰€æœ‰å•è¯æ”¾å…¥listå¹¶ç»Ÿè®¡
         InputStreamReader isr = new InputStreamReader(new FileInputStream(path));
         BufferedReader br = new BufferedReader(isr);
         String str=null;
-        List<String> lists = new ArrayList<String>();  //´æ´¢¹ıÂËºóµ¥´ÊµÄÁĞ±í  
+        List<String> lists = new ArrayList<String>();  //å­˜å‚¨è¿‡æ»¤åå•è¯çš„åˆ—è¡¨  
         while((str=br.readLine())!=null){
-            String[] tmp = str.split("[^a-zA-Z-]");  //¹ıÂË³öÖ»º¬ÓĞ×ÖÄ¸µÄ
+            String[] tmp = str.split("[^a-zA-Z-]");  //è¿‡æ»¤å‡ºåªå«æœ‰å­—æ¯çš„
             for(int i=0;i<tmp.length;i++){
                 if(tmp[i].length()!=0)
                 {
-                	//×îºó´ø¶ÌºáÏßµÄµ«Î´Á´½ÓµÄµ¥´ÊÈ¥µô¶ÌÏß
+                	//æœ€åå¸¦çŸ­æ¨ªçº¿çš„ä½†æœªé“¾æ¥çš„å•è¯å»æ‰çŸ­çº¿
                 	if((tmp[i].substring(tmp[i].length()-1, tmp[i].length())).equals("-"))
                 	{
-                		if(tmp[i].length()!=1)//±ÜÃâµ¥¸öºáÏßÊ±Êä³ö¿Õ×Ö·û
+                		if(tmp[i].length()!=1)//é¿å…å•ä¸ªæ¨ªçº¿æ—¶è¾“å‡ºç©ºå­—ç¬¦
                 		{
                     		lists.add(tmp[i].substring(0, tmp[i].length()-1)); 
+                		}
+                	}
+                	//ç¬¬ä¸€ä¸ªå¸¦çŸ­æ¨ªçº¿çš„ä½†æœªé“¾æ¥çš„å•è¯å»æ‰çŸ­çº¿
+                	else if((tmp[i].substring(0,1)).equals("-"))
+                	{
+                		if(tmp[i].length()!=1)//é¿å…å•ä¸ªæ¨ªçº¿æ—¶è¾“å‡ºç©ºå­—ç¬¦
+                		{
+                    		lists.add(tmp[i].substring(1, tmp[i].length())); 
                 		}
                 	}
                 	else
@@ -41,8 +49,8 @@ public class Scan {
             }
         }  
         isr.close();
-        Map<String, Integer> wordsCount = new TreeMap<String,Integer>();  //´æ´¢µ¥´Ê¼ÆÊıĞÅÏ¢£¬keyÖµÎªµ¥´Ê£¬valueÎªµ¥´ÊÊı      
-        //µ¥´ÊµÄ´ÊÆµÍ³¼Æ    
+        Map<String, Integer> wordsCount = new TreeMap<String,Integer>();  //å­˜å‚¨å•è¯è®¡æ•°ä¿¡æ¯ï¼Œkeyå€¼ä¸ºå•è¯ï¼Œvalueä¸ºå•è¯æ•°      
+        //å•è¯çš„è¯é¢‘ç»Ÿè®¡    
         for (String li : lists) {    
             if(wordsCount.get(li) != null){    
                 wordsCount.put(li,wordsCount.get(li) + 1);    
@@ -53,5 +61,4 @@ public class Scan {
         }
         return wordsCount;
 	}
-
 }
